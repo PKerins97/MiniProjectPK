@@ -15,11 +15,14 @@ public class CarRentalApp {
         menubar.add(car);
         JMenuItem addCar = new JMenuItem("Add Car");
         JMenuItem updateCar = new JMenuItem("Update Car");
+        car.add(addCar);
+        car.add(updateCar);
 
 
         JMenu rental = new JMenu("Rent");
         menubar.add(rental);
         JMenuItem makeRes = new JMenuItem("Make Reservation");
+        rental.add(makeRes);
 
 
     }
