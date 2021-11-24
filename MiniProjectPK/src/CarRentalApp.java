@@ -8,9 +8,13 @@ public class CarRentalApp {
         frame.setSize(400,200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JMenu registerCar;
-        JMenu rentCar;
-        JMenu admin;
+        JMenuBar menubar = new JMenuBar();
+        frame.setJMenuBar(menubar);
 
+        JMenu car = new JMenu("Car");
+        menubar.add(car);
+
+        JMenu rental = new JMenu("Rent");
+        menubar.add(rental);
     }
 }
