@@ -16,5 +16,6 @@ public class CarRentalApp {
 
         JMenu rental = new JMenu("Rent");
         menubar.add(rental);
+
     }
 }
