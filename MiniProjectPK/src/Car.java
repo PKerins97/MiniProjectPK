@@ -53,5 +53,10 @@ public class Car {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Category: %s \nMake: %s \nModel: %s, Reg Number: %s \nPrice: %2f", getCategory(),getCarMake(),getCarModel(),getRegNum(),getPrice());
+    }
 }
 
