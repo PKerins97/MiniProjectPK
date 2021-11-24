@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import java.awt.Event.*;
+import java.util.*;
 
 public class CarRentalApp {
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class CarRentalApp {
         rental.add(makeRes);
 
 
-
+        ArrayList<Car> cars = new ArrayList<>();
 
     }
 }
