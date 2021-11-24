@@ -1,6 +1,8 @@
 
 import javax.swing.*;
 import java.awt.Event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 public class CarRentalApp {
@@ -26,6 +28,17 @@ public class CarRentalApp {
         JMenuItem makeRes = new JMenuItem("Make Reservation");
         rental.add(makeRes);
 
+
+        class exitaction implements ActionListener{
+            public void actionPerformered (ActionEvent e){
+                System.exit(0);
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
 
         ArrayList<Car> cars = new ArrayList<>();
 
