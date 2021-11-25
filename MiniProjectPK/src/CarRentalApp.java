@@ -5,18 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-public class CarRentalApp {
+public class CarRentalApp extends JFrame implements ActionListener {
 
     private static JButton button;
     private static JButton loginButton;
     private static JLabel passwordLabel;
     private static JLabel userLabel;
-    private static JLabel signInLabel;
+    private static JLabel success;
     private static JPasswordField passwordText;
     private static  JTextField userText;
 
+ public  CarRentalApp(){
 
-    public static void main(String[] args) {
 
         JFrame frame = new JFrame("Menu");
         frame.setVisible(true);
@@ -41,67 +41,78 @@ public class CarRentalApp {
         JMenuItem makeRes = new JMenuItem("Make Reservation");
         rental.add(makeRes);*/
 
-        JPanel panel = new JPanel();
+    JPanel panel = new JPanel();
         frame.add(panel);
-        loginButton = new JButton("Login");
+    loginButton = new JButton("Login");
         panel.add(loginButton);
         loginButton.addActionListener(new loginAction());
-    }
+}
 
-
-    static class loginAction implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-            JFrame loginFrame = new JFrame("Login ");
-
-            loginFrame.setSize(300, 300);
-
-
-            JPanel panel = new JPanel();
-            loginFrame.add(panel);
-             userLabel = new JLabel("UserName");
-            userLabel.setBounds(10, 50, 80, 25);
-            panel.add(userLabel);
-            userText = new JTextField(20);
-            userText.setBounds(100, 50, 165, 25);
-            panel.add(userText);
-
-            passwordLabel = new JLabel("Password");
-            userLabel.setBounds(10, 80, 80, 25);
-            panel.add(passwordLabel);
-
-            passwordText = new JPasswordField(20);
-            passwordText.setBounds(100, 50, 165, 25);
-            panel.add(passwordText);
-
-
-             button = new JButton("Login");
-            button.setBounds(100, 80, 80, 25);
-            button.addActionListener(new LoggingIn());
-            panel.add(button);
-
-            signInLabel = new JLabel(" ");
-            signInLabel.setBounds(10, 110, 300, 25);
-            panel.add(signInLabel);
-
-            loginFrame.setVisible(true);
-
-
-        }
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 
-    static class LoggingIn implements ActionListener {
 
-        public void actionPerformed(ActionEvent e) {
-            String user = userText.getText();
-            String password = passwordLabel.getText();
+static class loginAction implements ActionListener {
 
-            if(user.equals("user")&& password.equals("password")){
-                signInLabel.setText("Login successful!!");
+    public void actionPerformed(ActionEvent e) {
+        JFrame loginFrame = new JFrame("Login ");
+
+        loginFrame.setSize(300, 300);
+
+
+        JPanel panel = new JPanel();
+        loginFrame.add(panel);
+        userLabel = new JLabel("UserName");
+        userLabel.setBounds(10, 50, 80, 25);
+        panel.add(userLabel);
+        userText = new JTextField(20);
+        userText.setBounds(100, 50, 165, 25);
+        panel.add(userText);
+
+        passwordLabel = new JLabel("Password");
+        userLabel.setBounds(10, 80, 80, 25);
+        panel.add(passwordLabel);
+
+        passwordText = new JPasswordField(20);
+        passwordText.setBounds(100, 50, 165, 25);
+        panel.add(passwordText);
+
+
+        button = new JButton("Login");
+        button.setBounds(100, 80, 80, 25);
+        button.addActionListener(new LoggingIn());
+        panel.add(button);
+
+        success = new JLabel("");
+        success.setBounds(10, 110, 300, 25);
+        panel.add(success);
+
+        loginFrame.setVisible(true);
+    }
+
+        class LoggingIn implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
+                String user = userText.getText();
+                String password = passwordText.getText();
+
+                if(user.equals("user")&& password.equals("password")){
+                    success.setText("Login successful!!");
+                }
+                else {
+                    success.setText("Invalid username or password. Try Again!!");
+                }
+
             }
-
-
         }
+
     }
+
+
+    public static void main(String[] args) {new CarRentalApp();}
+
+
+
 }
