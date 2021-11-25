@@ -77,7 +77,7 @@ public class CarRentalApp {
 
              button = new JButton("Login");
             button.setBounds(100, 80, 80, 25);
-            button.addActionListener(new GUI());
+            button.addActionListener(new LoggingIn());
             panel.add(button);
 
             signInLabel = new JLabel(" ");
@@ -91,7 +91,7 @@ public class CarRentalApp {
 
     }
 
-    static class GUI implements ActionListener {
+    static class LoggingIn implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             String user = userText.getText();
