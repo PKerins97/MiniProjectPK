@@ -1,5 +1,6 @@
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.Event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,8 @@ public class CarRentalApp extends JFrame implements ActionListener {
     private static JLabel success;
     private static JPasswordField passwordText;
     private static  JTextField userText;
+    //JLabel displayField;
+    //ImageIcon image;
 
  public  CarRentalApp(){
 
@@ -22,6 +25,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setSize(400, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
 
@@ -42,10 +46,22 @@ public class CarRentalApp extends JFrame implements ActionListener {
         rental.add(makeRes);*/
 
     JPanel panel = new JPanel();
-        frame.add(panel);
+    frame.add(panel);
     loginButton = new JButton("Login");
-        panel.add(loginButton);
-        loginButton.addActionListener(new loginAction());
+    loginButton.setBackground(Color.cyan);
+    panel.add(loginButton);
+    loginButton.addActionListener(new loginAction());
+
+
+   /* try{
+        image = new ImageIcon(getClass().getResource("logo.png"));
+        displayField = new JLabel(image);
+        frame.add(displayField);
+    }
+    catch(Exception e){
+        System.out.println("Image cannot be found!");
+    }*/
+
 }
 
     @Override
@@ -54,7 +70,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
     }
 
 
-static class loginAction implements ActionListener {
+    static class loginAction implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         JFrame loginFrame = new JFrame("Login ");
@@ -95,6 +111,7 @@ static class loginAction implements ActionListener {
         class LoggingIn implements ActionListener {
 
             public void actionPerformed(ActionEvent e) {
+
                 String user = userText.getText();
                 String password = passwordText.getText();
 
