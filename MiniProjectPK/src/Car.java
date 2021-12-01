@@ -6,12 +6,12 @@ public class Car {
     private String regNum;
     private double price;
 
-    public Car(String category, String carMake, String carModel, String regNum, double price) {
+    public Car(String category, String make, String model, String resNumber, double price) {
         setCategory(category);
         setCarMake(carMake);
         setCarModel(carModel);
         setRegNum(regNum);
-        setPrice(price);
+        setPrice(this.price);
     }
 
     public String getCategory() {

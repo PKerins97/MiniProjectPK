@@ -1,7 +1,6 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -14,55 +13,36 @@ public class CarRentalApp extends JFrame implements ActionListener {
     private static JLabel userLabel;
     private static JLabel success;
     private static JPasswordField passwordText;
-    private static  JTextField userText;
+    private static JTextField userText;
     //JLabel displayField;
     //ImageIcon image;
 
- public  CarRentalApp(){
+
+    ArrayList<Car> cars = new ArrayList<>();
+    private Car car;
+
+
+    public CarRentalApp() {
 
 
         JFrame frame = new JFrame("Menu");
-        frame.setVisible(true);
-        frame.setSize(400, 200);
+        setBounds(400, 100, 500, 500);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        loginButton = new JButton("Login");
+        loginButton.setBackground(Color.cyan);
+        panel.add(loginButton);
+        loginButton.addActionListener(new loginAction());
+
+        frame.setVisible(true);
 
 
-
-        /*JMenuBar menubar = new JMenuBar();
-        frame.setJMenuBar(menubar);
-
-        JMenu car = new JMenu("Car");
-        menubar.add(car);
-        JMenuItem addCar = new JMenuItem("Add Car");
-        JMenuItem updateCar = new JMenuItem("Update Car");
-        car.add(addCar);
-        car.add(updateCar);
-
-
-        JMenu rental = new JMenu("Rent");
-        menubar.add(rental);
-        JMenuItem makeRes = new JMenuItem("Make Reservation");
-        rental.add(makeRes);*/
-
-    JPanel panel = new JPanel();
-    frame.add(panel);
-    loginButton = new JButton("Login");
-    loginButton.setBackground(Color.cyan);
-    panel.add(loginButton);
-    loginButton.addActionListener(new loginAction());
-
-
-   /* try{
-        image = new ImageIcon(getClass().getResource("logo.png"));
-        displayField = new JLabel(image);
-        frame.add(displayField);
     }
-    catch(Exception e){
-        System.out.println("Image cannot be found!");
-    }*/
-
-}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -70,66 +50,181 @@ public class CarRentalApp extends JFrame implements ActionListener {
     }
 
 
-    static class loginAction implements ActionListener {
+    class loginAction implements ActionListener {
 
-    public void actionPerformed(ActionEvent e) {
-        JFrame loginFrame = new JFrame("Login ");
-
-        loginFrame.setSize(300, 300);
-
-
-        JPanel panel = new JPanel();
-        loginFrame.add(panel);
-        userLabel = new JLabel("UserName");
-        userLabel.setBounds(10, 50, 80, 25);
-        panel.add(userLabel);
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
-
-        passwordLabel = new JLabel("Password");
-        userLabel.setBounds(10, 80, 80, 25);
-        panel.add(passwordLabel);
-
-        passwordText = new JPasswordField(20);
-        passwordText.setBounds(100, 50, 165, 25);
-        panel.add(passwordText);
+        public void actionPerformed(ActionEvent e) {
+            JFrame loginFrame = new JFrame("Login ");
+            setBounds(400, 100, 500, 500);
+            loginFrame.setSize(300, 300);
+            loginFrame.setLocationRelativeTo(null);
 
 
-        button = new JButton("Login");
-        button.setBounds(100, 80, 80, 25);
-        button.addActionListener(new LoggingIn());
-        panel.add(button);
+            JPanel panel = new JPanel();
+            loginFrame.add(panel);
+            userLabel = new JLabel("UserName");
+            userLabel.setBounds(10, 50, 80, 25);
+            panel.add(userLabel);
+            userText = new JTextField(20);
+            userText.setBounds(100, 50, 165, 25);
+            panel.add(userText);
 
-        success = new JLabel("");
-        success.setBounds(10, 110, 300, 25);
-        panel.add(success);
+            passwordLabel = new JLabel("Password");
+            userLabel.setBounds(10, 80, 80, 25);
+            panel.add(passwordLabel);
 
-        loginFrame.setVisible(true);
-    }
+            passwordText = new JPasswordField(20);
+            passwordText.setBounds(100, 50, 165, 25);
+            panel.add(passwordText);
 
-        class LoggingIn implements ActionListener {
+
+            button = new JButton("Login");
+            button.setBounds(100, 80, 80, 25);
+            button.addActionListener(new LoggedIn());
+            panel.add(button);
+
+            success = new JLabel("");
+            success.setBounds(10, 110, 300, 25);
+            panel.add(success);
+
+            loginFrame.setVisible(true);
+        }
+
+        class LoggedIn implements ActionListener {
 
             public void actionPerformed(ActionEvent e) {
 
                 String user = userText.getText();
                 String password = passwordText.getText();
 
-                if(user.equals("user")&& password.equals("password")){
-                    success.setText("Login successful!!");
-                }
-                else {
+                if (user.equals("user") && password.equals("password")) {
+                    JFrame frame = new JFrame("Main Menu ");
+                    setBounds(400, 100, 500, 500);
+                    frame.setSize(700, 700);
+                    frame.setLocationRelativeTo(null);
+                    JPanel panel = new JPanel();
+                    frame.add(panel);
+
+
+                    JButton carButton = new JButton("Car");
+                    //carButton.addActionListener(new CarMenu());
+                    panel.add(carButton);
+
+                    JButton addButton = new JButton("Add Car");
+                    addButton.setBounds(100, 80, 80, 25);
+                    addButton.setBackground(Color.cyan);
+                    //resButton.addActionListener(new AddCar());
+                    panel.add(addButton);
+
+
+                    JButton resButton = new JButton("Make Reservation");
+                    resButton.setBounds(100, 80, 80, 25);
+                    resButton.setBackground(Color.cyan);
+                    //resButton.addActionListener(new Reservation());
+                    panel.add(resButton);
+
+                    frame.setVisible(true);
+                } else {
                     success.setText("Invalid username or password. Try Again!!");
                 }
 
             }
+
+
         }
+
+        class CarMenu implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame frame = new JFrame("Add Car");
+                JButton addButton = new JButton("Add Car");
+                JPanel panel = new JPanel();
+                setBounds(400, 100, 500, 500);
+                frame.setSize(700, 700);
+                frame.setLocationRelativeTo(null);
+                addButton.setBackground(Color.cyan);
+                //addButton.addActionListener(addCar());
+                panel.add(addButton);
+
+            }
+        }
+       public static void main(String[] args) {
+           new CarRentalApp();
+       }
+        public void addCar() {
+
+            final String[] carsCategory = {"Sports", "Economy", "Premium"};
+            String category;
+            String make;
+            String model;
+            String resNumber;
+            double price;
+
+            category = (String) JOptionPane.showInputDialog(null, "Add Car", "Car", JOptionPane.QUESTION_MESSAGE, null, carsCategory, carsCategory[0]);
+
+            make = JOptionPane.showInputDialog("Enter car Make");
+            //validation that a price has been entered
+            model = JOptionPane.showInputDialog("Enter car Model");
+            //validation that a price has been entered
+            resNumber = JOptionPane.showInputDialog("Enter car Registration Number");
+            //validation code to see if its only letters and numbers
+            price = Double.parseDouble(JOptionPane.showInputDialog("Enter Dish's Price"));
+            //validation that a price has been entered
+
+            car = new Car(category, make, model, resNumber, price);
+            cars.add(car);
+
+            JOptionPane.showMessageDialog(null, "Car '" + make + model + "' added to the system");
+
+
+        }
+
+         public void displayCar() {
+            JComboBox carCombo = new JComboBox();
+            JTextArea output = new JTextArea();
+
+            output.setText("Car Details:\n\n");
+
+            if (cars.size() < 1) {
+                JOptionPane.showMessageDialog(null, "No Cars have been added to the system yet.", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Iterator<Car> iterator = cars.iterator();
+
+                while (iterator.hasNext()) {
+                    carCombo.addItem(iterator.next().getCarMake() + (iterator.next().getCarModel()));
+                }
+                JOptionPane.showMessageDialog(null, carCombo, "Select Car to view details", JOptionPane.PLAIN_MESSAGE);
+                int selected = carCombo.getSelectedIndex();
+                output.append(cars.get(selected).toString());
+
+                JOptionPane.showMessageDialog(null, output, "Car Details", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+
+       public void deleteCar() {
+
+            JComboBox carList = new JComboBox();
+
+            for (Car c : cars) {
+                carList.addItem((c.getCarMake() + c.getCarModel()));
+            }
+            JOptionPane.showMessageDialog(null, "Select car to be removed", "Remove Car", JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, carList, "Remove Car", JOptionPane.INFORMATION_MESSAGE);
+
+            int selected = carList.getSelectedIndex();
+
+            cars.remove(selected);
+
+            JOptionPane.showMessageDialog(null, "Car Removed", "Removed", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
+
+
 
     }
 
-
-    public static void main(String[] args) {new CarRentalApp();}
-
-
-
 }
+
+
