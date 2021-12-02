@@ -1,7 +1,6 @@
 
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -200,14 +199,14 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 addButton.setBounds(100, 80, 80, 25);
                 addButton.setBackground(Color.cyan);
                 panel.add(addButton);
-                addButton.addActionListener(this);
+                addButton.addActionListener(new AddingCar());
 
 
                 displayButton = new JButton("Display Cars");
                 displayButton.setBounds(100, 80, 80, 25);
                 displayButton.setBackground(Color.cyan);
                 panel.add(displayButton);
-                displayButton.addActionListener(this);//JB modified original code here
+                displayButton.addActionListener(new AddingCar());
 
                 deleteButton = new JButton("Display Cars");
                 deleteButton.setBounds(100, 80, 80, 25);
@@ -256,6 +255,31 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 frame.setVisible(true);
             }
         }
+
+        class AddingCar implements ActionListener {
+
+
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Adding Car");
+                setBounds(400, 100, 500, 500);
+                frame.setSize(600, 400);
+                frame.setLocationRelativeTo(null);
+                setLayout(new FlowLayout());
+                JPanel panel = new JPanel();
+                frame.add(panel);
+
+                JButton addButton = new JButton("Add Car");
+                addButton.setBounds(100, 80, 80, 25);
+                addButton.setBackground(Color.cyan);
+                panel.add(addButton);
+                addButton.addActionListener(addCar());
+
+                frame.setVisible(true);
+
+
+            }
+
+        }
         class MakingReservation implements ActionListener {
 
 
@@ -276,7 +300,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new CarRentalApp();
     }
-    public void addCar() {
+    public ActionListener addCar() {
 
         final String[] carsCategory = {"Sports", "Economy", "Premium"};
         String category;
@@ -296,9 +320,12 @@ public class CarRentalApp extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null,"Invalid Model entered. Must be only letters ","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         resNumber = JOptionPane.showInputDialog("Enter car Registration Number");
-        if(!resNumber.matches("[0-9]")){
-            JOptionPane.showMessageDialog(null,"Invalid Registration Number Added","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
+        //if(!resNumber.matches("[a-zA-Z_] +" + !resNumber.matches("[0-9]"))){
+           // JOptionPane.showMessageDialog(null,"Invalid Registration Number Added","ERROR",JOptionPane.ERROR_MESSAGE);
+
+        //website- Stackoverflow
+        //date - 2/12/21
+
         price = Double.parseDouble(JOptionPane.showInputDialog("Enter Car Price Per Day"));
         //validation that a price has been entered
 
@@ -308,7 +335,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, "Car '" + make +" "+ model + "' added to the system");
 
 
-
+        return null;
     }
 
     public void displayCar() {
