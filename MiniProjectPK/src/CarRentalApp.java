@@ -1,6 +1,7 @@
 
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,10 @@ public class CarRentalApp extends JFrame implements ActionListener {
     private static JButton loginButton;
     private static JLabel passwordLabel;
     private static JLabel label;
+    private static JLabel welcomeLabel;
     private static JLabel success;
+    private static JLabel imgLabel;
+    private static JLabel background;
     private static JPasswordField passwordText;
     private static JTextField Text;
     private static JButton addButton;
@@ -23,9 +27,10 @@ public class CarRentalApp extends JFrame implements ActionListener {
     private static JButton makeResButton;
     private static JButton cancelResButton;
     Container cPane = getContentPane();
+    ImageIcon imgicon;
 
     //JLabel displayField;
-    //ImageIcon image;
+
 
 
     ArrayList<Car> cars = new ArrayList<>();
@@ -41,15 +46,35 @@ public class CarRentalApp extends JFrame implements ActionListener {
         frame.setSize(600, 400);
         setLayout(new FlowLayout());
         frame.setLocationRelativeTo(null);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.add(Box.createVerticalStrut(10));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        ImageIcon imgicon = new ImageIcon("logo.png");
+        Container cPane = getContentPane();
+        welcomeLabel = new JLabel("Welcome to the System");
+        welcomeLabel.setFont(new Font("serif",3,20));
+        welcomeLabel.setForeground(Color.RED);
+
+        welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(welcomeLabel);
+        panel.add(Box.createVerticalStrut(35));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        frame.add(panel);
         loginButton = new JButton("Login");
+       loginButton.setPreferredSize(new Dimension(590, 100));
+
+        loginButton.setLayout(new GridLayout(1,3));
         loginButton.setBackground(Color.cyan);
+        loginButton.setForeground(Color.BLACK);
         panel.add(loginButton);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         loginButton.addActionListener(new loginAction());
+
+
 
         frame.setVisible(true);
 
@@ -189,6 +214,16 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 deleteButton.setBackground(Color.cyan);
                 panel.add(deleteButton);
                 deleteButton.addActionListener(this);
+
+                imgLabel = new JLabel();
+                imgLabel.setIcon(new ImageIcon(getClass().getResource("logo.png")));
+                panel.add(imgLabel);
+                                                                                                    //image code
+                                                                                                    //code gotten from sample project
+                                                                                                    // Written by DJ Yeong
+                                                                                                    //date - 2/12/21
+
+
                 frame.setVisible(true);
 
             }
@@ -220,6 +255,16 @@ public class CarRentalApp extends JFrame implements ActionListener {
 
                 frame.setVisible(true);
             }
+        }
+        class MakingReservation implements ActionListener {
+
+
+            public void actionPerformed(ActionEvent e) {
+
+
+
+            }
+
         }
 
     }
