@@ -1,0 +1,260 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+
+public class CarRentalApp extends JFrame implements ActionListener {
+
+    private static JButton button;
+    private static JButton loginButton;
+    private static JLabel passwordLabel;
+    private static JLabel userLabel;
+    private static JLabel success;
+    private static JPasswordField passwordText;
+    private static JTextField userText;
+    //JLabel displayField;
+    //ImageIcon image;
+
+
+    ArrayList<Car> cars = new ArrayList<>();
+    private Car car;
+
+
+    public CarRentalApp() {
+
+
+        JFrame frame = new JFrame("Menu");
+        setBounds(400, 100, 500, 500);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        loginButton = new JButton("Login");
+        loginButton.setBackground(Color.cyan);
+        panel.add(loginButton);
+        loginButton.addActionListener(new loginAction());
+
+        frame.setVisible(true);
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+
+    class loginAction implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            JFrame loginFrame = new JFrame("Login ");
+            setBounds(400, 100, 500, 500);
+            loginFrame.setSize(300, 300);
+            loginFrame.setLocationRelativeTo(null);
+
+
+            JPanel panel = new JPanel();
+            loginFrame.add(panel);
+            userLabel = new JLabel("UserName");
+            userLabel.setBounds(10, 50, 80, 25);
+            panel.add(userLabel);
+            userText = new JTextField(20);
+            userText.setBounds(100, 50, 165, 25);
+            panel.add(userText);
+
+            passwordLabel = new JLabel("Password");
+            userLabel.setBounds(10, 80, 80, 25);
+            panel.add(passwordLabel);
+
+            passwordText = new JPasswordField(20);
+            passwordText.setBounds(100, 50, 165, 25);
+            panel.add(passwordText);
+
+
+            button = new JButton("Login");
+            button.setBounds(100, 80, 80, 25);
+            button.addActionListener(new LoggedIn());
+            panel.add(button);
+
+            success = new JLabel("");
+            success.setBounds(10, 110, 300, 25);
+            panel.add(success);
+
+            loginFrame.setVisible(true);
+        }
+
+        class LoggedIn implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
+
+                String user = userText.getText();
+                String password = passwordText.getText();
+
+                if (user.equals("user") && password.equals("password")) {
+                    JFrame frame = new JFrame("Main Menu ");
+                    setBounds(400, 100, 500, 500);
+                    frame.setSize(700, 700);
+                    frame.setLocationRelativeTo(null);
+                    JPanel panel = new JPanel();
+                    frame.add(panel);
+
+
+                    JButton carButton = new JButton("Car");
+                    //carButton.addActionListener(new CarMenu());
+                    panel.add(carButton);
+
+                    JButton addButton = new JButton("Add Car");
+                    addButton.setBounds(100, 80, 80, 25);
+                    addButton.setBackground(Color.cyan);
+                    //resButton.addActionListener(new AddCar());
+                    panel.add(addButton);
+
+
+                    JButton resButton = new JButton("Make Reservation");
+                    resButton.setBounds(100, 80, 80, 25);
+                    resButton.setBackground(Color.cyan);
+                    //resButton.addActionListener(new Reservation());
+                    panel.add(resButton);
+
+                    frame.setVisible(true);
+                } else {
+                    success.setText("Invalid username or password. Try Again!!");
+                }
+
+            }
+
+
+        }
+
+        class CarMenu implements ActionListener {
+
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame frame = new JFrame("Add Car");
+                JButton addButton = new JButton("Add Car");
+                JPanel panel = new JPanel();
+                setBounds(400, 100, 500, 500);
+                frame.setSize(700, 700);
+                frame.setLocationRelativeTo(null);
+                addButton.setBackground(Color.cyan);
+                addButton.addActionListener(addCar());
+                panel.add(addButton);
+
+                frame = new JFrame ("Add Car");
+                JButton displayButton = new JButton("Display Cars");
+                panel = new JPanel();
+                setBounds(400, 100, 500, 500);
+                frame.setSize(700, 700);
+                frame.setLocationRelativeTo(null);
+                displayButton.setBackground(Color.cyan);
+                displayButton.addActionListener(displayCar());
+                panel.add(displayButton);
+
+            }
+        }
+       public static void main(String[] args) {
+           new CarRentalApp();
+       }
+        public ActionListener addCar() {
+
+            final String[] carsCategory = {"Sports", "Economy", "Premium"};
+            String category;
+            String make;
+            String model;
+            String resNumber;
+            double price;
+
+            category = (String) JOptionPane.showInputDialog(null, "Add Car", "Car", JOptionPane.QUESTION_MESSAGE, null, carsCategory, carsCategory[0]);
+
+            make = JOptionPane.showInputDialog("Enter car Make");
+            if(!make.matches("[a-zA-Z_]+")){
+                JOptionPane.showMessageDialog(null,"Invalid Make entered. Must be only letters ","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            model = JOptionPane.showInputDialog("Enter car Model");
+            if(!model.matches("[a-zA-Z_]+")){
+                JOptionPane.showMessageDialog(null,"Invalid Model entered. Must be only letters ","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            resNumber = JOptionPane.showInputDialog("Enter car Registration Number");
+            if(!resNumber.matches("[a-zA-Z_] +" + !resNumber.matches("[0-9]"))){
+                JOptionPane.showMessageDialog(null,"Invalid Registration Number Added","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            price = Double.parseDouble(JOptionPane.showInputDialog("Enter Dish's Price"));
+
+
+            car = new Car(category, make, model, resNumber, price);
+            cars.add(car);
+
+            JOptionPane.showMessageDialog(null, "Car '" + make + model + "' added to the system");
+
+
+            return null;
+        }
+
+         public ActionListener displayCar() {
+            JComboBox carCombo = new JComboBox();
+            JTextArea output = new JTextArea();
+
+            output.setText("Car Details:\n\n");
+
+            if (cars.size() < 1) {
+                JOptionPane.showMessageDialog(null, "No Cars have been added to the system yet.", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Iterator<Car> iterator = cars.iterator();
+
+                while (iterator.hasNext()) {
+                    carCombo.addItem(iterator.next().getCarMake() + (iterator.next().getCarModel()));
+                }
+                JOptionPane.showMessageDialog(null, carCombo, "Select Car to view details", JOptionPane.PLAIN_MESSAGE);
+                int selected = carCombo.getSelectedIndex();
+                output.append(cars.get(selected).toString());
+
+                JOptionPane.showMessageDialog(null, output, "Car Details", JOptionPane.PLAIN_MESSAGE);
+            }
+             return null;
+         }
+
+       public void deleteCar() {
+
+            JComboBox carList = new JComboBox();
+
+            for (Car c : cars) {
+                carList.addItem((c.getCarMake() + c.getCarModel()));
+            }
+            JOptionPane.showMessageDialog(null, "Select car to be removed", "Remove Car", JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, carList, "Remove Car", JOptionPane.INFORMATION_MESSAGE);
+
+            int selected = carList.getSelectedIndex();
+
+            cars.remove(selected);
+
+            JOptionPane.showMessageDialog(null, "Car Removed", "Removed", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        /*public class rentingCar(String Car){
+            String car;
+
+            Scanner input = new Scanner(System.in);
+
+            while(true){
+
+                System.out.println("Please enter the car you want to book\n" + getCar)
+            }*/
+
+
+        }
+
+
+
+
+
+    }
+
+
+
+
