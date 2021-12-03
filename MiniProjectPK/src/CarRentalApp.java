@@ -316,6 +316,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 JPanel panel = new JPanel();
                 frame.add(panel);
 
+
                 JButton addButton = new JButton("Delete Car");
                 addButton.setBounds(100, 80, 80, 25);
                 addButton.setBackground(Color.cyan);
