@@ -206,13 +206,13 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 displayButton.setBounds(100, 80, 80, 25);
                 displayButton.setBackground(Color.cyan);
                 panel.add(displayButton);
-                displayButton.addActionListener(new AddingCar());
+                displayButton.addActionListener(new DisplayCar());
 
-                deleteButton = new JButton("Display Cars");
+                deleteButton = new JButton("Delete Cars");
                 deleteButton.setBounds(100, 80, 80, 25);
                 deleteButton.setBackground(Color.cyan);
                 panel.add(deleteButton);
-                deleteButton.addActionListener(this);
+                deleteButton.addActionListener(new DeleteCar());
 
                 imgLabel = new JLabel();
                 imgLabel.setIcon(new ImageIcon(getClass().getResource("logo.png")));
@@ -280,6 +280,54 @@ public class CarRentalApp extends JFrame implements ActionListener {
             }
 
         }
+        class DisplayCar implements ActionListener {
+
+
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Car's in System");
+                setBounds(400, 100, 500, 500);
+                frame.setSize(600, 400);
+                frame.setLocationRelativeTo(null);
+                setLayout(new FlowLayout());
+                JPanel panel = new JPanel();
+                frame.add(panel);
+
+                JButton addButton = new JButton("Display System");
+                addButton.setBounds(100, 80, 80, 25);
+                addButton.setBackground(Color.cyan);
+                panel.add(addButton);
+                addButton.addActionListener(displayCar());
+
+                frame.setVisible(true);
+
+
+            }
+
+        }
+        class DeleteCar implements ActionListener {
+
+
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Delete Car");
+                setBounds(400, 100, 500, 500);
+                frame.setSize(600, 400);
+                frame.setLocationRelativeTo(null);
+                setLayout(new FlowLayout());
+                JPanel panel = new JPanel();
+                frame.add(panel);
+
+                JButton addButton = new JButton("Delete Car");
+                addButton.setBounds(100, 80, 80, 25);
+                addButton.setBackground(Color.cyan);
+                panel.add(addButton);
+                addButton.addActionListener(deleteCar());
+
+                frame.setVisible(true);
+
+
+            }
+
+        }
         class MakingReservation implements ActionListener {
 
 
@@ -338,7 +386,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
         return null;
     }
 
-    public void displayCar() {
+    public ActionListener displayCar() {
         JComboBox carCombo = new JComboBox();
         JTextArea output = new JTextArea();
 
@@ -359,9 +407,10 @@ public class CarRentalApp extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, output, "Car Details", JOptionPane.PLAIN_MESSAGE);
         }
 
+        return null;
     }
 
-    public void deleteCar() {
+    public ActionListener deleteCar() {
 
         JComboBox carList = new JComboBox();
 
@@ -378,6 +427,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
 
         JOptionPane.showMessageDialog(null, "Car Removed", "Removed", JOptionPane.INFORMATION_MESSAGE);
 
+        return null;
     }
 
 
