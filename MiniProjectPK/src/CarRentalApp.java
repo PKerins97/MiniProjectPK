@@ -63,7 +63,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         loginButton = new JButton("Login");
-       loginButton.setPreferredSize(new Dimension(590, 100));
+        loginButton.setPreferredSize(new Dimension(590, 100));
 
         loginButton.setLayout(new GridLayout(1,3));
         loginButton.setBackground(Color.cyan);
@@ -217,10 +217,10 @@ public class CarRentalApp extends JFrame implements ActionListener {
                 imgLabel = new JLabel();
                 imgLabel.setIcon(new ImageIcon(getClass().getResource("logo.png")));
                 panel.add(imgLabel);
-                                                                                                    //image code
-                                                                                                    //code gotten from sample project
-                                                                                                    // Written by DJ Yeong
-                                                                                                    //date - 2/12/21
+                //image code
+                //code gotten from sample project
+                // Written by DJ Yeong
+                //date - 2/12/21
 
 
                 frame.setVisible(true);
@@ -329,16 +329,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
             }
 
         }
-        class MakingReservation implements ActionListener {
 
-
-            public void actionPerformed(ActionEvent e) {
-
-
-
-            }
-
-        }
 
     }
 
@@ -370,7 +361,7 @@ public class CarRentalApp extends JFrame implements ActionListener {
         }
         resNumber = JOptionPane.showInputDialog("Enter car Registration Number");
         //if(!resNumber.matches("[a-zA-Z_] +" + !resNumber.matches("[0-9]"))){
-           // JOptionPane.showMessageDialog(null,"Invalid Registration Number Added","ERROR",JOptionPane.ERROR_MESSAGE);
+        // JOptionPane.showMessageDialog(null,"Invalid Registration Number Added","ERROR",JOptionPane.ERROR_MESSAGE);
 
         //website- Stackoverflow
         //date - 2/12/21

@@ -1,4 +1,4 @@
-public class Car {
+public class Car extends CarRentalApp {
 
     private String category;
     private String carMake;
